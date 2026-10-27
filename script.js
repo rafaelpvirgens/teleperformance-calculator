@@ -5,7 +5,9 @@ function calculateSalary() {
         9: "September", 10: "October", 11: "November", 12: "December"
     };
 
-    let monthNum = parseInt(document.getElementById('monthNum').value) || 10;
+    // Lê o nome do funcionário e o mês selecionado no dropdown
+    const employeeName = document.getElementById('employeeName').value.trim() || "Employee";
+    let monthNum = parseInt(document.getElementById('monthSelect').value) || 10;
     if (!months[monthNum]) monthNum = 10;
     const monthName = months[monthNum];
 
@@ -93,6 +95,7 @@ function calculateSalary() {
 
     let output = `${"=".repeat(68)}
       SALARY STATEMENT / PAYSLIP - ${monthName.toUpperCase()} 2026
+      Employee: ${employeeName}
       Teleperformance Portugal | Google Project
       Created by Rafael Virgens
 ${"=".repeat(68)}
