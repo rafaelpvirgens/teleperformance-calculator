@@ -149,7 +149,6 @@ pre#output {
     overflow-y: auto;
 }
 
-/* Print styles para exportar direto como PDF ao clicar no botão Export PDF */
 @media print {
     body * {
         visibility: hidden;

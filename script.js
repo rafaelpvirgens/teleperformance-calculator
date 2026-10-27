@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function calculateSalary() {
     try {
+        const employeeName = document.getElementById('employeeName').value.trim() || "Not specified";
         const monthName = document.getElementById('month').value;
         const contractBaseSalary = parseFloat(document.getElementById('baseSalary').value) || 0;
         const bonus = parseFloat(document.getElementById('bonus').value) || 0;
@@ -103,7 +104,8 @@ function calculateSalary() {
         let sb = "";
         sb += "====================================================================\n";
         sb += `      SALARY STATEMENT / PAYSLIP - ${monthName.toUpperCase()} 2026\n`;
-        sb += "      Teleperformance Portugal | Google Project\n";
+        sb += "      TP - PaySlip Simulator (non-official)\n";
+        sb += `      Employee Name: ${employeeName}\n`;
         sb += "      Created by Rafael Virgens\n";
         sb += "====================================================================\n\n";
 
@@ -156,6 +158,7 @@ function calculateSalary() {
 }
 
 function clearFields() {
+    document.getElementById('employeeName').value = "";
     document.getElementById('month').value = "October";
     document.getElementById('baseSalary').value = "938.00";
     document.getElementById('bonus').value = "0.00";
