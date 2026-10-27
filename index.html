@@ -6,20 +6,19 @@
     <title>Teleperformance Payslip Calculator</title>
     <!-- Tailwind CSS for modern styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
     <!-- Google Fonts: Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }
     </style>
+    <!-- html2pdf library for PDF export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen py-10 px-4">
     <div class="max-w-4xl mx-auto bg-white shadow-xl rounded-2xl overflow-hidden">
         
         <!-- Header -->
         <div class="bg-indigo-600 text-white p-6 flex items-center justify-center gap-4">
-            <!-- Sua logo personalizada -->
             <img src="mylogo.jpg" alt="Logo" class="h-12 w-auto object-contain rounded-md bg-white p-1">
             <div class="text-center">
                 <h1 class="text-2xl font-bold">PAYSLIP SIMULATOR</h1>
@@ -139,4 +138,128 @@
         <!-- Result Section -->
         <div id="resultSection" class="hidden bg-slate-900 text-slate-100 p-6 md:p-8 border-t border-slate-800 font-mono text-xs md:text-sm">
             <div class="flex justify-between items-center mb-4">
-                <h2 class="text-xl font-bold text-indigo-400 font-sans
+                <h2 class="text-xl font-bold text-indigo-400 font-sans">Salary Statement Output</h2>
+                <button onclick="document.getElementById('resultSection').classList.add('hidden')" class="text-slate-400 hover:text-white cursor-pointer">
+                    ✕
+                </button>
+            </div>
+            <div id="outputContent" class="space-y-1 whitespace-pre-line overflow-x-auto p-4 bg-slate-800/50 rounded-lg"></div>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic Integrated Directly -->
+    <script>
+        function calculateSalary() {
+            const employeeName = document.getElementById('employeeName').value;
+            const monthSelect = document.getElementById('monthSelect');
+            const monthName = monthSelect.options[monthSelect.selectedIndex].text;
+            
+            const baseSalary = parseFloat(document.getElementById('contractBaseSalary').value) || 0;
+            const bonus = parseFloat(document.getElementById('bonus').value) || 0;
+            const duodecimos = document.getElementById('duodecimosOpt').value;
+            const workingDays = parseInt(document.getElementById('workingDays').value) || 22;
+            const irsPercent = parseFloat(document.getElementById('irsPercent').value) || 0;
+
+            const weekdayNights = parseInt(document.getElementById('weekdayNights').value) || 0;
+            const fridayNights = parseInt(document.getElementById('fridayNights').value) || 0;
+            const saturdayNights = parseInt(document.getElementById('saturdayNights').value) || 0;
+            const sundayNights = parseInt(document.getElementById('sundayNights').value) || 0;
+
+            const hourlyRate = baseSalary / 173;
+            const nightBonusRate = hourlyRate * 0.25;
+            const hoursPerNight = 8;
+            
+            const totalNights = weekdayNights + fridayNights + saturdayNights + sundayNights;
+            const totalNightValue = totalNights * hoursPerNight * (hourlyRate + nightBonusRate);
+
+            const mealAllowancePerDay = 7.63;
+            const totalMealAllowance = workingDays * mealAllowancePerDay;
+
+            const grossTotal = baseSalary + bonus + totalNightValue + totalMealAllowance;
+
+            const socialSecurity = (baseSalary + bonus + totalNightValue) * 0.11;
+            const irsDeduction = (baseSalary * (irsPercent / 100));
+
+            const totalDeductions = socialSecurity + irsDeduction;
+            const netSalary = grossTotal - totalDeductions;
+
+            const outputText = `
+Name:           ${employeeName}
+Month:          ${monthName}
+---------------------------------------------
+[ EARNINGS ]
+Base Salary:    € ${baseSalary.toFixed(2)}
+Bonus:          € ${bonus.toFixed(2)}
+Night Shifts:   € ${totalNightValue.toFixed(2)} (${totalNights} nights)
+Meal Allowance: € ${totalMealAllowance.toFixed(2)} (${workingDays} days)
+---------------------------------------------
+GROSS TOTAL:    € ${grossTotal.toFixed(2)}
+
+[ DEDUCTIONS ]
+Social Security:€ ${socialSecurity.toFixed(2)}
+IRS Tax (${irsPercent}%):  € ${irsDeduction.toFixed(2)}
+---------------------------------------------
+TOTAL DEDUCT:   € ${totalDeductions.toFixed(2)}
+=============================================
+NET SALARY:     € ${netSalary.toFixed(2)}
+=============================================
+Duodecimos:     ${duodecimos}
+`;
+
+            const resultSection = document.getElementById('resultSection');
+            const outputContent = document.getElementById('outputContent');
+            
+            outputContent.innerText = outputText;
+            resultSection.classList.remove('hidden');
+            resultSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function clearForm() {
+            if(!confirm("Are you sure you want to clear all fields?")) return;
+
+            document.getElementById('employeeName').value = "Rafael Virgens";
+            document.getElementById('contractBaseSalary').value = "938";
+            document.getElementById('bonus').value = "0";
+            document.getElementById('workingDays').value = "22";
+            document.getElementById('irsPercent').value = "0";
+            
+            document.getElementById('weekdayNights').value = "0";
+            document.getElementById('fridayNights').value = "0";
+            document.getElementById('saturdayNights').value = "0";
+            document.getElementById('sundayNights').value = "0";
+
+            document.getElementById('resultSection').classList.add('hidden');
+        }
+
+        function exportToPdf() {
+            const element = document.getElementById('outputContent');
+            
+            if(document.getElementById('resultSection').classList.contains('hidden')) {
+                alert("Please calculate the payslip first before exporting.");
+                return;
+            }
+
+            const opt = {
+                margin: 10,
+                filename: `Payslip_${document.getElementById('employeeName').value}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            const pdfHeader = document.createElement('div');
+            pdfHeader.innerHTML = `
+                <div style="text-align:center; margin-bottom: 20px; font-family: sans-serif;">
+                    <img src="mylogo.jpg" style="height:35px; margin: 0 auto; object-fit: contain;">
+                    <h2>OFFICIAL PAYSLIP SIMULATION</h2>
+                </div>
+            `;
+            element.prepend(pdfHeader);
+
+            html2pdf().set(opt).from(element).save().then(() => {
+                pdfHeader.remove();
+            });
+        }
+    </script>
+</body>
+</html>
