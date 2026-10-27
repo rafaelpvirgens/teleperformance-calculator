@@ -3,149 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teleperformance Payslip Calculator</title>
-    <!-- Tailwind CSS for modern styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- html2pdf library for PDF export -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <!-- Custom CSS -->
+    <title>Payslip Calculator - Teleperformance Portugal (Google)</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen py-10 px-4">
-    <div class="max-w-4xl mx-auto bg-white shadow-xl rounded-2xl overflow-hidden">
-        
-        <!-- Header -->
-        <div class="bg-indigo-600 text-white p-6 flex items-center justify-center gap-4">
-            <img src="mylogo.jpg" alt="Logo" class="h-12 w-auto object-contain rounded-md bg-white p-1">
-            <div class="text-center">
-                <h1 class="text-2xl font-bold">=== PAYSLIP CALCULATOR ===</h1>
-                <p class="text-indigo-200 text-sm mt-1">Teleperformance Portugal (Simulator) | Created by Rafael Virgens</p>
-            </div>
-        </div>
+<body>
+    <div class="container">
+        <header>
+            <h1>Payslip Calculator</h1>
+            <p>Teleperformance Portugal (Google Project) | Created by Rafael Virgens</p>
+        </header>
 
-        <!-- Form Section -->
-        <div class="p-6 md:p-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-            
-            <!-- Inputs Left Column -->
-            <div class="space-y-4">
-                <h2 class="text-lg font-semibold text-slate-700 border-b pb-2">Input Parameters</h2>
+        <div class="main-content">
+            <!-- Form Section -->
+            <div class="form-section">
+                <h2>Employee & Shift Details</h2>
                 
-                <div>
-                    <label class="block text-sm font-medium text-slate-600">Employee Name</label>
-                    <input type="text" id="employeeName" value="Rafael Virgens" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-slate-600">Month</label>
-                    <select id="monthSelect" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
-                        <option value="1">January</option>
-                        <option value="2">February</option>
-                        <option value="3">March</option>
-                        <option value="4">April</option>
-                        <option value="5">May</option>
-                        <option value="6">June</option>
-                        <option value="7">July</option>
-                        <option value="8">August</option>
-                        <option value="9">September</option>
-                        <option value="10" selected>October</option>
-                        <option value="11">November</option>
-                        <option value="12">December</option>
+                <div class="input-group">
+                    <label for="month">Month:</label>
+                    <select id="month">
+                        <option value="January">January</option>
+                        <option value="February">February</option>
+                        <option value="March">March</option>
+                        <option value="April">April</option>
+                        <option value="May">May</option>
+                        <option value="June">June</option>
+                        <option value="July">July</option>
+                        <option value="August">August</option>
+                        <option value="September">September</option>
+                        <option value="October" selected>October</option>
+                        <option value="November">November</option>
+                        <option value="December">December</option>
                     </select>
                 </div>
 
-                <div>
-                    <label class="block text-sm font-medium text-slate-600">Contract Base Salary (EUR)</label>
-                    <input type="number" id="contractBaseSalary" value="938" step="0.01" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                <div class="input-group">
+                    <label for="baseSalary">Contract Base Salary (EUR):</label>
+                    <input type="number" id="baseSalary" value="938.00" step="0.01">
                 </div>
 
-                <div>
-                    <label class="block text-sm font-medium text-slate-600">Monthly Productivity Bonus (EUR)</label>
-                    <input type="number" id="bonus" value="0" step="0.01" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                <div class="input-group">
+                    <label for="bonus">Monthly Productivity Bonus (EUR):</label>
+                    <input type="number" id="bonus" value="0.00" step="0.01">
                 </div>
 
-                <div>
-                    <label class="block text-sm font-medium text-slate-600">Duodecimos for Holiday & Christmas?</label>
-                    <select id="duodecimosOpt" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                <div class="input-group">
+                    <label for="duodecimos">Duodecimos (Holiday & Christmas):</label>
+                    <select id="duodecimos">
                         <option value="NO">NO</option>
                         <option value="YES">YES</option>
                     </select>
                 </div>
 
-                <div>
-                    <label class="block text-sm font-medium text-slate-600">Shift Option</label>
-                    <select id="shift" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
-                        <option value="1">1 - 21:00 to 06:00 (Span: 9h | Work: 8h)</option>
-                        <option value="2">2 - 23:00 to 08:00 (Span: 9h | Work: 8h)</option>
-                        <option value="3">3 - 15:00 to 00:00 (Span: 9h | Work: 8h)</option>
+                <div class="input-group">
+                    <label for="shift">Shift Option:</label>
+                    <select id="shift">
+                        <option value="1">1 - 21:00 to 06:00 (Span: 9h | Work: 8h | Lunch: 1h)</option>
+                        <option value="2">2 - 23:00 to 08:00 (Span: 9h | Work: 8h | Lunch: 1h)</option>
+                        <option value="3">3 - 15:00 to 00:00 (Span: 9h | Work: 8h | Lunch: 1h)</option>
                     </select>
                 </div>
 
-                <div>
-                    <label class="block text-sm font-medium text-slate-600">Total Working Days</label>
-                    <input type="number" id="workingDays" value="22" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                <div class="input-group">
+                    <label for="workingDays">Total Working Days [Standard: 22]:</label>
+                    <input type="number" id="workingDays" value="22">
                 </div>
 
-                <div>
-                    <label class="block text-sm font-medium text-slate-600">IRS Withholding Tax Percentage (%)</label>
-                    <input type="number" id="irsPercent" value="0" step="0.01" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
-                </div>
-            </div>
-
-            <!-- Night Shifts Right Column & Buttons -->
-            <div class="space-y-4 flex flex-col justify-between">
-                <div class="space-y-4">
-                    <h2 class="text-lg font-semibold text-slate-700 border-b pb-2">Night Shift Breakdown</h2>
-                    
-                    <div>
-                        <label class="block text-sm font-medium text-slate-600">Mon-Thu Nights</label>
-                        <input type="number" id="weekdayNights" value="0" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-slate-600">Friday Nights (ending Sat morning)</label>
-                        <input type="number" id="fridayNights" value="0" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-slate-600">Saturday Nights (ending Sun morning)</label>
-                        <input type="number" id="saturdayNights" value="0" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-slate-600">Sunday Nights (ending Mon morning)</label>
-                        <input type="number" id="sundayNights" value="0" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
-                    </div>
+                <div class="input-group">
+                    <label for="monThuNights">Night Shifts (Mon-Thu):</label>
+                    <input type="number" id="monThuNights" value="0">
                 </div>
 
-                <!-- Buttons Section -->
-                <div class="space-y-3 pt-4">
-                    <button onclick="calculateSalary()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-4 rounded-lg shadow-md transition duration-200 cursor-pointer">
-                        Calculate Payslip
-                    </button>
+                <div class="input-group">
+                    <label for="friNights">Night Shifts (Friday):</label>
+                    <input type="number" id="friNights" value="0">
+                </div>
 
-                    <div class="grid grid-cols-2 gap-3">
-                        <button onclick="clearForm()" class="w-full bg-slate-200 hover:bg-slate-300 text-slate-700 font-medium py-2.5 px-4 rounded-lg transition duration-200 cursor-pointer">
-                            Clear
-                        </button>
-                        <button onclick="exportToPdf()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2.5 px-4 rounded-lg transition duration-200 cursor-pointer">
-                            Export PDF
-                        </button>
-                    </div>
+                <div class="input-group">
+                    <label for="satNights">Night Shifts (Saturday):</label>
+                    <input type="number" id="satNights" value="0">
+                </div>
+
+                <div class="input-group">
+                    <label for="sunNights">Night Shifts (Sunday):</label>
+                    <input type="number" id="sunNights" value="0">
+                </div>
+
+                <div class="input-group">
+                    <label for="irsPercent">IRS Withholding Tax Percentage (%):</label>
+                    <input type="number" id="irsPercent" value="0.0" step="0.1">
+                </div>
+
+                <div class="button-group">
+                    <button id="btnCalculate" class="btn btn-calc">Calculate Payslip</button>
+                    <button id="btnClear" class="btn btn-clear">Clear</button>
+                    <button id="btnExportPDF" class="btn btn-pdf">Export PDF</button>
                 </div>
             </div>
-        </div>
 
-        <!-- Result Section -->
-        <div id="resultSection" class="hidden bg-slate-900 text-slate-100 p-6 md:p-8 border-t border-slate-800 font-mono text-xs md:text-sm">
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="text-xl font-bold text-indigo-400 mb-4 font-sans text-center">Salary Statement Output</h2>
-                <button onclick="document.getElementById('resultSection').classList.add('hidden')" class="text-slate-400 hover:text-white cursor-pointer font-bold text-lg">✕</button>
+            <!-- Output Section -->
+            <div class="output-section">
+                <h2>Payslip Output</h2>
+                <pre id="output">Click "Calculate Payslip" to generate the statement.</pre>
             </div>
-            <div id="outputContent" class="space-y-1 whitespace-pre-line overflow-x-auto p-4 bg-slate-800/50 rounded-lg"></div>
         </div>
     </div>
-
-    <!-- JavaScript Logic Link -->
     <script src="script.js"></script>
 </body>
 </html>
