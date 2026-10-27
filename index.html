@@ -6,13 +6,10 @@
     <title>Teleperformance Payslip Calculator</title>
     <!-- Tailwind CSS for modern styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-    </style>
     <!-- html2pdf library for PDF export -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen py-10 px-4">
     <div class="max-w-4xl mx-auto bg-white shadow-xl rounded-2xl overflow-hidden">
@@ -21,8 +18,8 @@
         <div class="bg-indigo-600 text-white p-6 flex items-center justify-center gap-4">
             <img src="mylogo.jpg" alt="Logo" class="h-12 w-auto object-contain rounded-md bg-white p-1">
             <div class="text-center">
-                <h1 class="text-2xl font-bold">PAYSLIP SIMULATOR</h1>
-                <p class="text-indigo-200 text-sm mt-1">Portugal Operations | Created by Rafael Virgens</p>
+                <h1 class="text-2xl font-bold">=== PAYSLIP CALCULATOR ===</h1>
+                <p class="text-indigo-200 text-sm mt-1">Teleperformance Portugal (Simulator) | Created by Rafael Virgens</p>
             </div>
         </div>
 
@@ -35,12 +32,12 @@
                 
                 <div>
                     <label class="block text-sm font-medium text-slate-600">Employee Name</label>
-                    <input type="text" id="employeeName" value="Rafael Virgens" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                    <input type="text" id="employeeName" value="Rafael Virgens" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-slate-600">Month</label>
-                    <select id="monthSelect" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                    <select id="monthSelect" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
                         <option value="1">January</option>
                         <option value="2">February</option>
                         <option value="3">March</option>
@@ -58,17 +55,17 @@
 
                 <div>
                     <label class="block text-sm font-medium text-slate-600">Contract Base Salary (EUR)</label>
-                    <input type="number" id="contractBaseSalary" value="938" step="0.01" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                    <input type="number" id="contractBaseSalary" value="938" step="0.01" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-slate-600">Monthly Productivity Bonus (EUR)</label>
-                    <input type="number" id="bonus" value="0" step="0.01" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                    <input type="number" id="bonus" value="0" step="0.01" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-slate-600">Duodecimos for Holiday & Christmas?</label>
-                    <select id="duodecimosOpt" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                    <select id="duodecimosOpt" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
                         <option value="NO">NO</option>
                         <option value="YES">YES</option>
                     </select>
@@ -76,7 +73,7 @@
 
                 <div>
                     <label class="block text-sm font-medium text-slate-600">Shift Option</label>
-                    <select id="shift" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                    <select id="shift" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
                         <option value="1">1 - 21:00 to 06:00 (Span: 9h | Work: 8h)</option>
                         <option value="2">2 - 23:00 to 08:00 (Span: 9h | Work: 8h)</option>
                         <option value="3">3 - 15:00 to 00:00 (Span: 9h | Work: 8h)</option>
@@ -85,12 +82,12 @@
 
                 <div>
                     <label class="block text-sm font-medium text-slate-600">Total Working Days</label>
-                    <input type="number" id="workingDays" value="22" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                    <input type="number" id="workingDays" value="22" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-slate-600">IRS Withholding Tax Percentage (%)</label>
-                    <input type="number" id="irsPercent" value="0" step="0.01" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                    <input type="number" id="irsPercent" value="0" step="0.01" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
                 </div>
             </div>
 
@@ -101,36 +98,36 @@
                     
                     <div>
                         <label class="block text-sm font-medium text-slate-600">Mon-Thu Nights</label>
-                        <input type="number" id="weekdayNights" value="0" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                        <input type="number" id="weekdayNights" value="0" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
                     </div>
 
                     <div>
                         <label class="block text-sm font-medium text-slate-600">Friday Nights (ending Sat morning)</label>
-                        <input type="number" id="fridayNights" value="0" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                        <input type="number" id="fridayNights" value="0" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
                     </div>
 
                     <div>
                         <label class="block text-sm font-medium text-slate-600">Saturday Nights (ending Sun morning)</label>
-                        <input type="number" id="saturdayNights" value="0" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                        <input type="number" id="saturdayNights" value="0" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
                     </div>
 
                     <div>
                         <label class="block text-sm font-medium text-slate-600">Sunday Nights (ending Mon morning)</label>
-                        <input type="number" id="sundayNights" value="0" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                        <input type="number" id="sundayNights" value="0" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
                     </div>
                 </div>
 
                 <!-- Buttons Section -->
-                <div class="space-y-3 pt-6">
-                    <button onclick="calculateSalary()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-4 rounded-xl shadow-md transition duration-200 cursor-pointer">
+                <div class="space-y-3 pt-4">
+                    <button onclick="calculateSalary()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-4 rounded-lg shadow-md transition duration-200 cursor-pointer">
                         Calculate Payslip
                     </button>
 
                     <div class="grid grid-cols-2 gap-3">
-                        <button onclick="clearForm()" class="w-full bg-slate-200 hover:bg-slate-300 text-slate-700 font-medium py-2.5 px-4 rounded-xl transition duration-200 cursor-pointer">
+                        <button onclick="clearForm()" class="w-full bg-slate-200 hover:bg-slate-300 text-slate-700 font-medium py-2.5 px-4 rounded-lg transition duration-200 cursor-pointer">
                             Clear
                         </button>
-                        <button onclick="exportToPdf()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2.5 px-4 rounded-xl transition duration-200 cursor-pointer">
+                        <button onclick="exportToPdf()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2.5 px-4 rounded-lg transition duration-200 cursor-pointer">
                             Export PDF
                         </button>
                     </div>
@@ -141,128 +138,14 @@
         <!-- Result Section -->
         <div id="resultSection" class="hidden bg-slate-900 text-slate-100 p-6 md:p-8 border-t border-slate-800 font-mono text-xs md:text-sm">
             <div class="flex justify-between items-center mb-4">
-                <h2 class="text-xl font-bold text-indigo-400 font-sans">Salary Statement Output</h2>
-                <button onclick="document.getElementById('resultSection').classList.add('hidden')" class="text-slate-400 hover:text-white cursor-pointer">
-                    ✕
-                </button>
+                <h2 class="text-xl font-bold text-indigo-400 mb-4 font-sans text-center">Salary Statement Output</h2>
+                <button onclick="document.getElementById('resultSection').classList.add('hidden')" class="text-slate-400 hover:text-white cursor-pointer font-bold text-lg">✕</button>
             </div>
             <div id="outputContent" class="space-y-1 whitespace-pre-line overflow-x-auto p-4 bg-slate-800/50 rounded-lg"></div>
         </div>
     </div>
 
-    <!-- JavaScript Integrated Directly -->
-    <script>
-        function calculateSalary() {
-            const employeeName = document.getElementById('employeeName').value;
-            const monthSelect = document.getElementById('monthSelect');
-            const monthName = monthSelect.options[monthSelect.selectedIndex].text;
-            
-            const baseSalary = parseFloat(document.getElementById('contractBaseSalary').value) || 0;
-            const bonus = parseFloat(document.getElementById('bonus').value) || 0;
-            const duodecimos = document.getElementById('duodecimosOpt').value;
-            const workingDays = parseInt(document.getElementById('workingDays').value) || 22;
-            const irsPercent = parseFloat(document.getElementById('irsPercent').value) || 0;
-
-            const weekdayNights = parseInt(document.getElementById('weekdayNights').value) || 0;
-            const fridayNights = parseInt(document.getElementById('fridayNights').value) || 0;
-            const saturdayNights = parseInt(document.getElementById('saturdayNights').value) || 0;
-            const sundayNights = parseInt(document.getElementById('sundayNights').value) || 0;
-
-            const hourlyRate = baseSalary / 173;
-            const nightBonusRate = hourlyRate * 0.25;
-            const hoursPerNight = 8;
-            
-            const totalNights = weekdayNights + fridayNights + saturdayNights + sundayNights;
-            const totalNightValue = totalNights * hoursPerNight * (hourlyRate + nightBonusRate);
-
-            const mealAllowancePerDay = 7.63;
-            const totalMealAllowance = workingDays * mealAllowancePerDay;
-
-            const grossTotal = baseSalary + bonus + totalNightValue + totalMealAllowance;
-
-            const socialSecurity = (baseSalary + bonus + totalNightValue) * 0.11;
-            const irsDeduction = (baseSalary * (irsPercent / 100));
-
-            const totalDeductions = socialSecurity + irsDeduction;
-            const netSalary = grossTotal - totalDeductions;
-
-            const outputText = `
-Name:           ${employeeName}
-Month:          ${monthName}
----------------------------------------------
-[ EARNINGS ]
-Base Salary:    EUR ${baseSalary.toFixed(2)}
-Bonus:          EUR ${bonus.toFixed(2)}
-Night Shifts:   EUR ${totalNightValue.toFixed(2)} (${totalNights} nights)
-Meal Allowance: EUR ${totalMealAllowance.toFixed(2)} (${workingDays} days)
----------------------------------------------
-GROSS TOTAL:    EUR ${grossTotal.toFixed(2)}
-
-[ DEDUCTIONS ]
-Social Security:EUR ${socialSecurity.toFixed(2)}
-IRS Tax (${irsPercent}%):  EUR ${irsDeduction.toFixed(2)}
----------------------------------------------
-TOTAL DEDUCT:   EUR ${totalDeductions.toFixed(2)}
-=============================================
-NET SALARY:     EUR ${netSalary.toFixed(2)}
-=============================================
-Duodecimos:     ${duodecimos}
-`;
-
-            const resultSection = document.getElementById('resultSection');
-            const outputContent = document.getElementById('outputContent');
-            
-            outputContent.innerText = outputText;
-            resultSection.classList.remove('hidden');
-            resultSection.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function clearForm() {
-            if(!confirm("Are you sure you want to clear all fields?")) return;
-
-            document.getElementById('employeeName').value = "Rafael Virgens";
-            document.getElementById('contractBaseSalary').value = "938";
-            document.getElementById('bonus').value = "0";
-            document.getElementById('workingDays').value = "22";
-            document.getElementById('irsPercent').value = "0";
-            
-            document.getElementById('weekdayNights').value = "0";
-            document.getElementById('fridayNights').value = "0";
-            document.getElementById('saturdayNights').value = "0";
-            document.getElementById('sundayNights').value = "0";
-
-            document.getElementById('resultSection').classList.add('hidden');
-        }
-
-        function exportToPdf() {
-            const element = document.getElementById('outputContent');
-            
-            if(document.getElementById('resultSection').classList.contains('hidden')) {
-                alert("Please calculate the payslip first before exporting.");
-                return;
-            }
-
-            const opt = {
-                margin: 10,
-                filename: `Payslip_${document.getElementById('employeeName').value}.pdf`,
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2 },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            };
-
-            const pdfHeader = document.createElement('div');
-            pdfHeader.innerHTML = `
-                <div style="text-align:center; margin-bottom: 20px; font-family: sans-serif;">
-                    <img src="mylogo.jpg" style="height:35px; margin: 0 auto; object-fit: contain;">
-                    <h2>OFFICIAL PAYSLIP SIMULATION</h2>
-                </div>
-            `;
-            element.prepend(pdfHeader);
-
-            html2pdf().set(opt).from(element).save().then(() => {
-                pdfHeader.remove();
-            });
-        }
-    </script>
+    <!-- JavaScript Logic Link -->
+    <script src="script.js"></script>
 </body>
 </html>

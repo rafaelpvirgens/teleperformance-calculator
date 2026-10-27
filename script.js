@@ -1,10 +1,3 @@
-// Load html2pdf dynamically for PDF export feature
-(function () {
-    const script = document.createElement('script');
-    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
-    document.head.appendChild(script);
-})();
-
 function calculateSalary() {
     const employeeName = document.getElementById('employeeName').value;
     const monthSelect = document.getElementById('monthSelect');
@@ -44,20 +37,20 @@ Name:           ${employeeName}
 Month:          ${monthName}
 ---------------------------------------------
 [ EARNINGS ]
-Base Salary:    € ${baseSalary.toFixed(2)}
-Bonus:          € ${bonus.toFixed(2)}
-Night Shifts:   € ${totalNightValue.toFixed(2)} (${totalNights} nights)
-Meal Allowance: € ${totalMealAllowance.toFixed(2)} (${workingDays} days)
+Base Salary:    EUR ${baseSalary.toFixed(2)}
+Bonus:          EUR ${bonus.toFixed(2)}
+Night Shifts:   EUR ${totalNightValue.toFixed(2)} (${totalNights} nights)
+Meal Allowance: EUR ${totalMealAllowance.toFixed(2)} (${workingDays} days)
 ---------------------------------------------
-GROSS TOTAL:    € ${grossTotal.toFixed(2)}
+GROSS TOTAL:    EUR ${grossTotal.toFixed(2)}
 
 [ DEDUCTIONS ]
-Social Security:€ ${socialSecurity.toFixed(2)}
-IRS Tax (${irsPercent}%):  € ${irsDeduction.toFixed(2)}
+Social Security:EUR ${socialSecurity.toFixed(2)}
+IRS Tax (${irsPercent}%):  EUR ${irsDeduction.toFixed(2)}
 ---------------------------------------------
-TOTAL DEDUCT:   € ${totalDeductions.toFixed(2)}
+TOTAL DEDUCT:   EUR ${totalDeductions.toFixed(2)}
 =============================================
-NET SALARY:     € ${netSalary.toFixed(2)}
+NET SALARY:     EUR ${netSalary.toFixed(2)}
 =============================================
 Duodecimos:     ${duodecimos}
 `;
