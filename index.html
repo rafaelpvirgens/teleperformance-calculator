@@ -57,17 +57,17 @@
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-slate-600">Contract Base Salary (€)</label>
+                    <label class="block text-sm font-medium text-slate-600">Contract Base Salary (EUR)</label>
                     <input type="number" id="contractBaseSalary" value="938" step="0.01" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-slate-600">Monthly Productivity Bonus (€)</label>
+                    <label class="block text-sm font-medium text-slate-600">Monthly Productivity Bonus (EUR)</label>
                     <input type="number" id="bonus" value="0" step="0.01" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-slate-600">Duodecimos included?</label>
+                    <label class="block text-sm font-medium text-slate-600">Duodecimos for Holiday & Christmas?</label>
                     <select id="duodecimosOpt" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                         <option value="NO">NO</option>
                         <option value="YES">YES</option>
@@ -77,9 +77,9 @@
                 <div>
                     <label class="block text-sm font-medium text-slate-600">Shift Option</label>
                     <select id="shift" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-                        <option value="1">1 - 21:00 to 06:00</option>
-                        <option value="2">2 - 23:00 to 08:00</option>
-                        <option value="3">3 - 15:00 to 00:00</option>
+                        <option value="1">1 - 21:00 to 06:00 (Span: 9h | Work: 8h)</option>
+                        <option value="2">2 - 23:00 to 08:00 (Span: 9h | Work: 8h)</option>
+                        <option value="3">3 - 15:00 to 00:00 (Span: 9h | Work: 8h)</option>
                     </select>
                 </div>
 
@@ -89,7 +89,7 @@
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-slate-600">IRS Withholding Tax (%)</label>
+                    <label class="block text-sm font-medium text-slate-600">IRS Withholding Tax Percentage (%)</label>
                     <input type="number" id="irsPercent" value="0" step="0.01" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                 </div>
             </div>
@@ -103,31 +103,34 @@
                         <label class="block text-sm font-medium text-slate-600">Mon-Thu Nights</label>
                         <input type="number" id="weekdayNights" value="0" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                     </div>
+
                     <div>
-                        <label class="block text-sm font-medium text-slate-600">Friday Nights</label>
+                        <label class="block text-sm font-medium text-slate-600">Friday Nights (ending Sat morning)</label>
                         <input type="number" id="fridayNights" value="0" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                     </div>
+
                     <div>
-                        <label class="block text-sm font-medium text-slate-600">Saturday Nights</label>
+                        <label class="block text-sm font-medium text-slate-600">Saturday Nights (ending Sun morning)</label>
                         <input type="number" id="saturdayNights" value="0" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                     </div>
+
                     <div>
-                        <label class="block text-sm font-medium text-slate-600">Sunday Nights</label>
+                        <label class="block text-sm font-medium text-slate-600">Sunday Nights (ending Mon morning)</label>
                         <input type="number" id="sundayNights" value="0" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                     </div>
                 </div>
 
                 <!-- Buttons Section -->
                 <div class="space-y-3 pt-6">
-                    <button onclick="calculateSalary()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-4 rounded-xl shadow-md transition duration-200 cursor-pointer flex items-center justify-center gap-2">
+                    <button onclick="calculateSalary()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-4 rounded-xl shadow-md transition duration-200 cursor-pointer">
                         Calculate Payslip
                     </button>
 
                     <div class="grid grid-cols-2 gap-3">
-                        <button onclick="clearForm()" class="w-full bg-slate-200 hover:bg-slate-300 text-slate-700 font-medium py-2.5 px-4 rounded-xl transition duration-200 cursor-pointer flex items-center justify-center gap-2">
+                        <button onclick="clearForm()" class="w-full bg-slate-200 hover:bg-slate-300 text-slate-700 font-medium py-2.5 px-4 rounded-xl transition duration-200 cursor-pointer">
                             Clear
                         </button>
-                        <button onclick="exportToPdf()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2.5 px-4 rounded-xl transition duration-200 cursor-pointer flex items-center justify-center gap-2">
+                        <button onclick="exportToPdf()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2.5 px-4 rounded-xl transition duration-200 cursor-pointer">
                             Export PDF
                         </button>
                     </div>
@@ -147,7 +150,7 @@
         </div>
     </div>
 
-    <!-- JavaScript Logic Integrated Directly -->
+    <!-- JavaScript Integrated Directly -->
     <script>
         function calculateSalary() {
             const employeeName = document.getElementById('employeeName').value;
@@ -188,20 +191,20 @@ Name:           ${employeeName}
 Month:          ${monthName}
 ---------------------------------------------
 [ EARNINGS ]
-Base Salary:    € ${baseSalary.toFixed(2)}
-Bonus:          € ${bonus.toFixed(2)}
-Night Shifts:   € ${totalNightValue.toFixed(2)} (${totalNights} nights)
-Meal Allowance: € ${totalMealAllowance.toFixed(2)} (${workingDays} days)
+Base Salary:    EUR ${baseSalary.toFixed(2)}
+Bonus:          EUR ${bonus.toFixed(2)}
+Night Shifts:   EUR ${totalNightValue.toFixed(2)} (${totalNights} nights)
+Meal Allowance: EUR ${totalMealAllowance.toFixed(2)} (${workingDays} days)
 ---------------------------------------------
-GROSS TOTAL:    € ${grossTotal.toFixed(2)}
+GROSS TOTAL:    EUR ${grossTotal.toFixed(2)}
 
 [ DEDUCTIONS ]
-Social Security:€ ${socialSecurity.toFixed(2)}
-IRS Tax (${irsPercent}%):  € ${irsDeduction.toFixed(2)}
+Social Security:EUR ${socialSecurity.toFixed(2)}
+IRS Tax (${irsPercent}%):  EUR ${irsDeduction.toFixed(2)}
 ---------------------------------------------
-TOTAL DEDUCT:   € ${totalDeductions.toFixed(2)}
+TOTAL DEDUCT:   EUR ${totalDeductions.toFixed(2)}
 =============================================
-NET SALARY:     € ${netSalary.toFixed(2)}
+NET SALARY:     EUR ${netSalary.toFixed(2)}
 =============================================
 Duodecimos:     ${duodecimos}
 `;
