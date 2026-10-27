@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teleperformance Payslip Calculator</title>
+    <!-- Tailwind CSS for modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen py-10 px-4">
+    <div class="max-w-4xl mx-auto bg-white shadow-xl rounded-2xl overflow-hidden">
+        
+        <!-- Header -->
+        <div class="bg-indigo-600 text-white p-6 text-center">
+            <h1 class="text-2xl font-bold">=== PAYSLIP CALCULATOR ===</h1>
+            <p class="text-indigo-200 text-sm mt-1">Teleperformance Portugal (Google) | Created by Rafael Virgens</p>
+        </div>
+
+        <!-- Form Section -->
+        <div class="p-6 md:p-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <!-- Inputs Left Column -->
+            <div class="space-y-4">
+                <h2 class="text-lg font-semibold text-slate-700 border-b pb-2">Input Parameters</h2>
+                
+                <div>
+                    <label class="block text-sm font-medium text-slate-600">Month Number (1 to 12)</label>
+                    <input type="number" id="monthNum" value="10" min="1" max="12" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-slate-600">Contract Base Salary (EUR)</label>
+                    <input type="number" id="contractBaseSalary" value="938" step="0.01" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-slate-600">Monthly Productivity Bonus (EUR)</label>
+                    <input type="number" id="bonus" value="0" step="0.01" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-slate-600">Duodecimos for Holiday & Christmas?</label>
+                    <select id="duodecimosOpt" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                        <option value="NO">NO</option>
+                        <option value="YES">YES</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-slate-600">Shift Option</label>
+                    <select id="shift" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                        <option value="1">1 - 21:00 to 06:00 (Span: 9h | Work: 8h)</option>
+                        <option value="2">2 - 23:00 to 08:00 (Span: 9h | Work: 8h)</option>
+                        <option value="3">3 - 15:00 to 00:00 (Span: 9h | Work: 8h)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-slate-600">Total Working Days</label>
+                    <input type="number" id="workingDays" value="22" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-slate-600">IRS Withholding Tax Percentage (%)</label>
+                    <input type="number" id="irsPercent" value="0" step="0.01" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                </div>
+            </div>
+
+            <!-- Night Shifts Right Column & Button -->
+            <div class="space-y-4 flex flex-col justify-between">
+                <div class="space-y-4">
+                    <h2 class="text-lg font-semibold text-slate-700 border-b pb-2">Night Shift Breakdown</h2>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-slate-600">Mon-Thu Nights</label>
+                        <input type="number" id="weekdayNights" value="0" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-slate-600">Friday Nights (ending Sat morning)</label>
+                        <input type="number" id="fridayNights" value="0" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-slate-600">Saturday Nights (ending Sun morning)</label>
+                        <input type="number" id="saturdayNights" value="0" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-slate-600">Sunday Nights (ending Mon morning)</label>
+                        <input type="number" id="sundayNights" value="0" class="mt-1 w-full p-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                </div>
+
+                <button onclick="calculateSalary()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-4 rounded-lg shadow-md transition duration-200 cursor-pointer">
+                    Calculate Payslip
+                </button>
+            </div>
+        </div>
+
+        <!-- Result Section -->
+        <div id="resultSection" class="hidden bg-slate-900 text-slate-100 p-6 md:p-8 border-t border-slate-800 font-mono text-xs md:text-sm">
+            <h2 class="text-xl font-bold text-indigo-400 mb-4 font-sans text-center">Salary Statement Output</h2>
+            <div id="outputContent" class="space-y-1 whitespace-pre-line overflow-x-auto"></div>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic Link -->
+    <script src="script.js"></script>
+</body>
+</html>
